@@ -33,6 +33,8 @@ use SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue111Entity;
 use SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue156Contact;
 use SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue156ContactTelephoneNumber;
 use SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue156Client;
+use SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue194User;
+use SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue194Address;
 use SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue31Reve;
 use SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue31User;
 use SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue87Organization;
@@ -65,6 +67,8 @@ class IssueTest extends BaseTest
         'SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue156Client',
         'SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue198Car',
         'SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue198Owner',
+        'SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue194User',
+        'SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue194Address',
     );
 
     protected $auditedEntities = array(
@@ -87,6 +91,8 @@ class IssueTest extends BaseTest
         'SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue156Client',
         'SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue198Car',
         'SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue198Owner',
+        'SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue194User',
+        'SimpleThings\EntityAudit\Tests\Fixtures\Issue\Issue194Address',
     );
 
     public function testIssue31()
@@ -246,6 +252,17 @@ class IssueTest extends BaseTest
         $object = $auditReader->find(get_class($number), $number->getId(), 1);
     }
     
+    public function testIssue194()
+    {
+        $user = new Issue194User();
+        $address = new Issue194Address($user);
+
+        $this->em->persist($user);
+        $this->em->flush();
+        $this->em->persist($address);
+        $this->em->flush();
+    }
+
     public function testIssue198()
     {
         $owner = new Issue198Owner();
