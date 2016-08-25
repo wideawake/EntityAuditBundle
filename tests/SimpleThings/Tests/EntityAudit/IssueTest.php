@@ -261,6 +261,13 @@ class IssueTest extends BaseTest
         $this->em->flush();
         $this->em->persist($address);
         $this->em->flush();
+
+        $auditReader = $this->auditManager->createAuditReader($this->em);
+
+        $auditReader->find(get_class($user), $user->getId(), 1);
+
+        $address = $auditReader->find(get_class($address), $address->getUser()->getId(), 2);
+        $this->assertEquals($address->getUser(), $user);
     }
 
     public function testIssue198()

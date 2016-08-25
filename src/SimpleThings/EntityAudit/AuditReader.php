@@ -279,6 +279,10 @@ class AuditReader
                     !$class->isIdentifier($assoc['fieldName'])
                     ? 're' // root entity
                     : 'e';
+
+                //something wrong here
+                //$mapping['joinColumnFieldNames'][$joinColumn['name']] = isset($joinColumn['fieldName']) ? $joinColumn['fieldName'] : $joinColumn['name'];
+
                 $columnList[] = $tableAlias.'.'.$sourceCol;
                 $columnMap[$sourceCol] = $this->platform->getSQLResultCasing($sourceCol);
             }
@@ -356,7 +360,7 @@ class AuditReader
         $keyParts = array();
 
         foreach($class->getIdentifierFieldNames() as $name) {
-            $keyParts[] = $data[$name];
+            $keyParts[] = $data[$class->getFieldForColumn($columnMap[$name])];
         }
 
         $key = implode(':', $keyParts);

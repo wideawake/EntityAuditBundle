@@ -16,4 +16,12 @@ class Issue194Address
     {
         $this->user = $user;
     }
+
+    /**
+     * @return Issue194User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
