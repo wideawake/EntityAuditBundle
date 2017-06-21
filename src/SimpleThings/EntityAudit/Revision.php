@@ -31,12 +31,14 @@ class Revision
     private $rev;
     private $timestamp;
     private $username;
+    private $entity;
 
-    function __construct($rev, $timestamp, $username)
+    function __construct($rev, $timestamp, $username, $entity)
     {
         $this->rev = $rev;
         $this->timestamp = $timestamp;
         $this->username = $username;
+        $this->entity = $entity;
     }
 
     public function getRev()
@@ -52,5 +54,13 @@ class Revision
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEntity()
+    {
+        return $this->entity;
     }
 }
